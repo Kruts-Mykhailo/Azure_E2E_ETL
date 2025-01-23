@@ -51,8 +51,8 @@ terraform apply \
 
 * [deploy_datasets.py](./deploy_datasets.py)
 
-Description: A python script to deploy Datasets for transforming and loading data in Azure Data Factory.
-User usage: A user can login in ADF Studio and develop the necessary pipelines with data. 
+Description: A python script to deploy Datasets for transforming and loading data in Azure Data Factory.  
+User usage: A user can login in ADF Studio and develop the necessary pipelines with data.   
 Running: 
 ```
 python deploy_datasets.py
@@ -60,8 +60,8 @@ python deploy_datasets.py
 
 * [deploy_pipeline.py](./deploy_pipeline.py)
 
-Description: A python script to deploy a test pipeline to transform Data.
-User usage: ⚠️ WORK IN PROGRESS.
+Description: A python script to deploy a test pipeline to transform Data.  
+User usage: ⚠️ WORK IN PROGRESS.  
 
 
 ### Data: 
