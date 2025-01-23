@@ -1,3 +1,4 @@
+from ctypes import ArgumentError
 from azure.identity import DefaultAzureCredential
 from azure.mgmt.datafactory import DataFactoryManagementClient
 from dotenv import load_dotenv
@@ -9,6 +10,10 @@ load_dotenv()  # take environment variables from .env.
 subscription_id = os.getenv("SUBSCRIPTION_ID")
 resource_group_name = "test-rg"
 data_factory_name = "data-factory-source"
+
+if not subscription_id:
+    raise ArgumentError("SUBSCRIPTION_ID environment variable not set")
+
 # Authenticate
 credential = DefaultAzureCredential()
 adf_client = DataFactoryManagementClient(credential, subscription_id)
