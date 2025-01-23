@@ -25,8 +25,14 @@ if not subscription_id:
 # Initialize the client
 adf_client = DataFactoryManagementClient(credential, subscription_id)
 
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Construct the relative path to the JSON file
+relative_path = os.path.join(script_dir, "pipelines", "pipeline_with_dataflow.json")
+
+
 # Load your JSON pipeline definition
-with open("pipeline_with_dataflow.json", "r") as json_file:
+with open(relative_path, "r") as json_file:
     pipeline_definition = json.load(json_file)
 
 # Deploy the pipeline

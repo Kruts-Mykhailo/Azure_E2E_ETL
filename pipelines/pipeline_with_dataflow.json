@@ -1,5 +1,4 @@
 {
-    "$schema": "https://schema.management.azure.com/providers/Microsoft.DataFactory/schemas/2018-06-01/dataflow.json",
     "name": "TransformDataFlow",
     "properties": {
       "type": "MappingDataFlow",
@@ -10,10 +9,6 @@
             "dataset": {
               "referenceName": "TripData",
               "type": "DatasetReference"
-            },
-            "schemaLinkedService": {
-              "referenceName": "SynapseLinkedService",
-              "type": "LinkedServiceReference"
             }
           },
           {
@@ -21,10 +16,6 @@
             "dataset": {
               "referenceName": "TripFares",
               "type": "DatasetReference"
-            },
-            "schemaLinkedService": {
-              "referenceName": "SynapseLinkedService",
-              "type": "LinkedServiceReference"
             }
           }
         ],
@@ -34,10 +25,6 @@
             "dataset": {
               "referenceName": "TransformedTripData",
               "type": "DatasetReference"
-            },
-            "schemaLinkedService": {
-              "referenceName": "SynapseLinkedService",
-              "type": "LinkedServiceReference"
             }
           }
         ],

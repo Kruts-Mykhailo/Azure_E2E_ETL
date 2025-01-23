@@ -170,9 +170,9 @@ def upload_file_to_data_lake(file_path, file_name):
 if __name__ == "__main__":
     # upload_file_to_data_lake(local_file_path_trip_data, "TripDataNew.csv")
     # upload_file_to_data_lake(local_file_path_trip_fares, "TripFaresNew.csv")
-    conn = connect_to_synapse()
-    execute_query(conn)
-    conn.close()
+    # conn = connect_to_synapse()
+    # execute_query(conn)
+    # conn.close()
     # create_trip_data_csv_dataset()
     # create_trip_fares_csv_dataset()
     create_synapse_sink_dataset()
