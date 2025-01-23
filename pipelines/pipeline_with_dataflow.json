@@ -1,0 +1,77 @@
+{
+    "$schema": "https://schema.management.azure.com/providers/Microsoft.DataFactory/schemas/2018-06-01/dataflow.json",
+    "name": "TransformDataFlow",
+    "properties": {
+      "type": "MappingDataFlow",
+      "typeProperties": {
+        "sources": [
+          {
+            "name": "TripDataSource",
+            "dataset": {
+              "referenceName": "TripData",
+              "type": "DatasetReference"
+            },
+            "schemaLinkedService": {
+              "referenceName": "SynapseLinkedService",
+              "type": "LinkedServiceReference"
+            }
+          },
+          {
+            "name": "TripFaresSource",
+            "dataset": {
+              "referenceName": "TripFares",
+              "type": "DatasetReference"
+            },
+            "schemaLinkedService": {
+              "referenceName": "SynapseLinkedService",
+              "type": "LinkedServiceReference"
+            }
+          }
+        ],
+        "sinks": [
+          {
+            "name": "SynapseSink",
+            "dataset": {
+              "referenceName": "TransformedTripData",
+              "type": "DatasetReference"
+            },
+            "schemaLinkedService": {
+              "referenceName": "SynapseLinkedService",
+              "type": "LinkedServiceReference"
+            }
+          }
+        ],
+        "transformations": [
+          {
+            "name": "JoinTripDataAndFares",
+            "type": "Join",
+            "inputs": [
+              { "stream": "TripDataSource" },
+              { "stream": "TripFaresSource" }
+            ],
+            "condition": "TripDataSource.medallion == TripFaresSource.medallion && TripDataSource.hack_license == TripFaresSource.hack_license && TripDataSource.vendor_id == TripFaresSource.vendor_id && TripDataSource.pickup_datetime == TripFaresSource.pickup_datetime",
+            "joinType": "Inner"
+          },
+          {
+            "name": "AggregateByPaymentType",
+            "type": "Aggregate",
+            "inputs": [
+              { "stream": "JoinTripDataAndFares" }
+            ],
+            "groupBy": ["payment_type"],
+            "aggregates": [
+              {
+                "name": "average_fare",
+                "expression": "avg(total_amount)"
+              },
+              {
+                "name": "total_trip_distance",
+                "expression": "sum(trip_distance)"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+  
